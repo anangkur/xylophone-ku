@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonClicked(_ sender: UIButton) {
+        rippleEffect(sender: sender)
         playSound(soundName: sender.titleLabel?.text ?? "")
     }
     
@@ -27,5 +28,16 @@ class ViewController: UIViewController {
         player.play()
     }
     
+    func rippleEffect(sender: UIButton) {
+        UIView.animate(withDuration: 0.2) {
+            sender.alpha = 0.5
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
+            UIView.animate(withDuration: 0.2) {
+                sender.alpha = 1.0
+            }
+        }
+    }
 }
 
